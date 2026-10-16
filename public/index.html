@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tilt Rush | Game screen</title>
+  <meta name="theme-color" content="#14143D">
+  <link rel="icon" href="/icons/icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Rubik:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/game.css">
+</head>
+<body>
+  <canvas id="road" aria-label="Race track"></canvas>
+
+  <header class="hud">
+    <div class="hud-left">
+      <span class="logo">Tilt Rush</span>
+      <span id="speedo" class="speedo" hidden>0 km/h</span>
+    </div>
+    <ul id="hudPlayers" class="hud-players" aria-label="Players"></ul>
+    <div class="net" id="net"><span class="dot"></span><span id="netText">Connecting…</span></div>
+  </header>
+
+  <!-- Lobby -->
+  <section id="lobby" class="overlay lobby">
+    <div class="lobby-grid">
+      <div class="pitch">
+        <h1 class="title">Tilt<br>Rush!</h1>
+        <p class="tagline">Your phone is the steering wheel. Let's goooo!</p>
+        <ol class="steps">
+          <li><b>Scan the code</b> with your phone camera.</li>
+          <li><b>Hold your phone</b> sideways, like a steering wheel.</li>
+          <li><b>Tilt to steer, shake to jump,</b> hold BOOST to fly.</li>
+        </ol>
+      </div>
+      <div class="join-card">
+        <div class="qr-wrap"><img id="qr" alt="QR code to join the game" width="220" height="220"></div>
+        <p class="join-label">Room code</p>
+        <p id="roomCode" class="room-code">····</p>
+        <p class="join-url">or open <span id="joinUrl"></span></p>
+        <p id="httpsNote" class="https-note" hidden></p>
+      </div>
+    </div>
+    <ul id="slots" class="slots" aria-label="Players joined"></ul>
+    <div class="lobby-actions">
+      <button id="startBtn" class="btn btn-go" disabled>Waiting for players…</button>
+      <button id="kbBtn" class="btn btn-ghost">Add keyboard player (for testing)</button>
+    </div>
+  </section>
+
+  <!-- Countdown -->
+  <div id="countdown" class="countdown" hidden aria-live="assertive"></div>
+
+  <!-- Waiting for a disconnected phone -->
+  <section id="waiting" class="overlay small" hidden>
+    <p class="big">Paused</p>
+    <p id="waitingText">Waiting for a phone to reconnect…</p>
+    <p class="hint">The race resumes on its own when it's back.</p>
+    <button id="skipWait" class="btn btn-ghost">Continue without them</button>
+  </section>
+
+  <!-- Results -->
+  <section id="results" class="overlay small" hidden>
+    <p id="winner" class="big"></p>
+    <ol id="board" class="board"></ol>
+    <button id="againBtn" class="btn btn-go">Race again</button>
+    <p class="hint">Or tap "Race again" on any phone.</p>
+  </section>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/game.js"></script>
+</body>
+</html>

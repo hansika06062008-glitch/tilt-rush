@@ -1,0 +1,22 @@
+{
+  "name": "tilt-rush",
+  "version": "1.0.0",
+  "description": "Anything but a Game Controller: your phone becomes a real-time motion steering wheel for a browser racing game.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "lan": "node server.js --https",
+    "test": "node test/latency-test.js"
+  },
+  "engines": { "node": ">=18" },
+  "dependencies": {
+    "express": "^4.21.2",
+    "qrcode": "^1.5.4",
+    "selfsigned": "^2.4.1",
+    "socket.io": "^4.8.1"
+  },
+  "devDependencies": {
+    "socket.io-client": "^4.8.1"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <title>Tilt Rush | Controller</title>
+  <meta name="theme-color" content="#14143D">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/icons/icon-192.png">
+  <link rel="apple-touch-icon" href="/icons/icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Rubik:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/controller.css">
+</head>
+<body>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <!-- JOIN -->
+  <main id="join" class="join">
+    <h1 class="title">Tilt<br>Rush!</h1>
+    <p class="sub">Turn your phone into a steering wheel.</p>
+    <form id="joinForm" class="join-form" autocomplete="off">
+      <label>Room code
+        <input id="code" name="code" maxlength="4" required placeholder="ABCD" autocapitalize="characters" spellcheck="false" inputmode="text">
+      </label>
+      <label>Your name
+        <input id="name" name="name" maxlength="14" required placeholder="e.g. Anamika">
+      </label>
+      <p id="joinError" class="error" role="alert"></p>
+      <button id="joinBtn" class="btn btn-go" type="submit">Let's ride! 🏁</button>
+      <p class="note">When asked, allow motion access so tilting can steer.</p>
+    </form>
+  </main>
+
+  <!-- PAD -->
+  <main id="pad" class="pad" hidden>
+    <header class="bar">
+      <span class="status"><span id="dot" class="dot"></span><span id="statusText">Connecting…</span></span>
+      <span id="lat" class="lat" title="Delay from your phone to the game screen">-- ms</span>
+      <span id="me" class="me-chip"></span>
+    </header>
+
+    <section class="controls">
+      <button id="boostBtn" class="pad-btn boost" aria-label="Boost (hold)">
+        <span class="fill" id="boostFill"></span>
+        <span class="lbl">BOOST</span><span class="sub-lbl">hold</span>
+      </button>
+
+      <div class="center">
+        <div id="wheelArea" class="wheel-area">
+          <svg id="wheel" class="wheel" viewBox="0 0 200 200" aria-hidden="true">
+            <circle cx="100" cy="100" r="86" fill="none" stroke="currentColor" stroke-width="22"/>
+            <circle cx="100" cy="100" r="22" fill="currentColor"/>
+            <rect x="20" y="92" width="160" height="16" rx="8" fill="currentColor"/>
+            <rect x="92" y="100" width="16" height="80" rx="8" fill="currentColor"/>
+            <rect x="88" y="6" width="24" height="22" rx="6" fill="#FFE14A"/>
+          </svg>
+        </div>
+        <div class="steer-bar" aria-hidden="true"><i id="steerMark"></i></div>
+        <p id="hint" class="hint">Hold your phone like a steering wheel.</p>
+        <p id="scoreLine" class="score-line"></p>
+      </div>
+
+      <button id="jumpBtn" class="pad-btn jump" aria-label="Jump">
+        <span class="lbl">JUMP</span><span class="sub-lbl">or shake!</span>
+      </button>
+    </section>
+
+    <footer class="tools">
+      <button id="calBtn" class="chip">🎯 Calibrate</button>
+      <div class="seg" role="group" aria-label="Steering sensitivity">
+        <button data-sens="chill">Chill</button>
+        <button data-sens="normal">Normal</button>
+        <button data-sens="spicy">Spicy</button>
+      </div>
+      <button id="hapticBtn" class="chip" aria-pressed="true">📳 Buzz on</button>
+      <button id="modeBtn" class="chip">✋ Touch steer</button>
+      <button id="telBtn" class="chip" aria-pressed="false">📈 Sensors</button>
+    </footer>
+
+    <div id="telemetry" class="telemetry" hidden></div>
+
+    <!-- banners: lobby / game over / paused -->
+    <div id="banner" class="banner" hidden>
+      <p id="bannerTitle" class="banner-title"></p>
+      <p id="bannerText" class="banner-text"></p>
+      <button id="bannerBtn" class="btn btn-go" hidden></button>
+    </div>
+
+    <!-- calibration -->
+    <div id="calib" class="calib" hidden>
+      <p class="banner-title">Calibrate 🎯</p>
+      <p class="banner-text">Hold your phone sideways like a steering wheel, nice and straight. Then tap the button.</p>
+      <button id="calGo" class="btn btn-go">Set straight position</button>
+      <button id="calSkip" class="link">Skip for now</button>
+    </div>
+  </main>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/controller.js"></script>
+  <script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(() => {});</script>
+</body>
+</html>
