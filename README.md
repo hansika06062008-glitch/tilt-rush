@@ -1,5 +1,8 @@
 # 🏁 Tilt Rush: Anything but a Game Controller
 
+**Play it live:** https://tilt-rush.onrender.com
+open it on a laptop, then scan the QR code with your phone.
+
 Your phone becomes a **real-time motion steering wheel** for a browser racing game on your laptop. Tilt to steer, shake to jump, hold BOOST to fly past trucks. Up to 4 phones can race on the same screen.
 
 Built for the VinnovateIT App Development Round 1 task.
